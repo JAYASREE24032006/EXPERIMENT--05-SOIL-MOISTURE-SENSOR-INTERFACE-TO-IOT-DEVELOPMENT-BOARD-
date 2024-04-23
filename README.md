@@ -1,7 +1,13 @@
 # EXPERIMENT--05-SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-
-## Aim: To Interface a Analog Input  (soil moisture sensor) to ARM IOT development board and write a  program to obtain  the data on the com port 
-## Components required: STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
+## Aim: 
+
+To Interface a Analog Input  (soil moisture sensor) to ARM IOT development board and write a  program to obtain  the data on the com port 
+## Components required: 
+
+STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
+
 ## Theory 
+
 #### Hardware Overview
 A typical soil moisture sensor consists of two parts.
 
@@ -98,9 +104,62 @@ GND is the ground pin.
 
 ## STM 32 CUBE PROGRAM :
 
+```
+
+#include "main.h"
+#include "stdio.h"
+
+#if defined (__ICCARM__) || defined (__ARMCC_VERSION)
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#elif defined(__GNUC__)
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#endif
+
+PUTCHAR_PROTOTYPE
+{
+  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, 0xFFFF);
+  return ch;
+}
+
+while (1)
+  {
+	  HAL_ADC_Start(&hadc);
+	  		HAL_ADC_PollForConversion(&hadc,100);
+	  		adc_val = HAL_ADC_GetValue(&hadc);
+	  		uint32_t soilmoisture;
+	  		soilmoisture=adc_val/10.24;
+	  		HAL_ADC_Stop(&hadc);
+	  		HAL_Delay(500);
+	  		printf("soilmoisture=:%ld\n",soilmoisture);
+	  		if(adc_val<500)
+	  		{
+	  			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);;
+	  		}
+	  		if(adc_val>500)
+	  		{
+	  			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);;
+	  		}
+  }
+}
+
+```
+
 
 
 ## Output screen shots on serial monitor   :
+
+![Screenshot 2024-04-23 113325](https://github.com/JAYASREE24032006/EXPERIMENT--05-SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-/assets/144360800/583c28b3-4532-42d0-b6c1-98398b894372)
+
+![Screenshot 2024-04-23 113335](https://github.com/JAYASREE24032006/EXPERIMENT--05-SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-/assets/144360800/3cc4eea6-1cb4-42b0-a560-6d93e57e7d05)
+
+## Circuit Setup   :
+
+![Screenshot 2024-04-23 113343](https://github.com/JAYASREE24032006/EXPERIMENT--05-SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-/assets/144360800/c2dcd579-2074-42d4-98bb-64430a5ee78a)
+
+![Screenshot 2024-04-23 113351](https://github.com/JAYASREE24032006/EXPERIMENT--05-SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-/assets/144360800/fdf39f71-e17b-47ed-acc6-dc1f6ec44c1c)
+
+
+
  
  
  
