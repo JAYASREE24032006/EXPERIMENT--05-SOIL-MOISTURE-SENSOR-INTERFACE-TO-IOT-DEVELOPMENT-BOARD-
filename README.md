@@ -1,23 +1,31 @@
-# EXPERIMENT--05-SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-
-## Aim: 
+# EX_05  SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-
 
-To Interface a Analog Input  (soil moisture sensor) to ARM IOT development board and write a  program to obtain  the data on the com port 
-## Components required: 
+### DATE : 01.04.2024
+
+## Aim : 
+
+To Interface a Analog Input  (soil moisture sensor) to ARM IOT development board and write a  program to obtain  the data on the com port
+
+## Components required : 
 
 STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
 
-## Theory 
+## Theory :
 
-#### Hardware Overview
+#### Hardware Overview :
+
 A typical soil moisture sensor consists of two parts.
 
-The Probe
+**The Probe**
+
 The sensor includes a fork-shaped probe with two exposed conductors that is inserted into the soil or wherever the moisture content is to be measured.
 
 As previously stated, it acts as a variable resistor, with resistance varying according to soil moisture.
 ![image](https://github.com/vasanthkumarch/EXPERIMENT--05-SOIL-MOISTURE-SENSOR-INTERFACE-TO-IOT-DEVELOPMENT-BOARD-/assets/36288975/00e1751d-44e6-41e3-b261-717a657861be)
-The Module
+
+**The Module**
 In addition, the sensor includes an electronic module that connects the probe to the Arduino.
+
 
 The module generates an output voltage based on the resistance of the probe, which is available at an Analog Output (AO) pin.
 
